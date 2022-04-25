@@ -1,6 +1,6 @@
 import store from '@/store'
 import w3 from '@/scripts/w3'
-
+import ct from '@/scripts/const'
 export default {
 
   async setup(currentNetworkId){
@@ -23,7 +23,7 @@ export default {
 
         // check if user have been changed the metamask network
         window.ethereum.on('chainChanged', function () {
-            const networkId = process.env.VUE_APP_NETWORK;
+            const networkId = ct.networkId;
             if(networkId !== currentNetworkId){
               window.ethereum.request({
               method: 'wallet_switchEthereumChain',

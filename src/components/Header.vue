@@ -40,6 +40,7 @@
 import Icons from '@/components/Icons'
 import Notiz from '@/components/notiz'
 import get from '@/scripts/funct'
+import ct from '@/scripts/const'
 import w3 from '@/scripts/w3'
 export default {
   name: 'Header',
@@ -82,7 +83,7 @@ export default {
       if(window.ethereum){
 
           // get current network
-          const networkId = process.env.VUE_APP_NETWORK;
+          const networkId = ct.networkId  
           const currentNetworkId = Number(window.ethereum.networkVersion) 
 
           // if current network is not equal mainnet switch to mainnet   

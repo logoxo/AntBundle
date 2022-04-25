@@ -218,6 +218,7 @@
 <script>
 import Icons from "@/components/Icons.vue";
 import w3 from "@/scripts/w3";
+import ct from '@/scripts/const'
 import funct from "@/scripts/funct";
 import socialShare from "@/components/SocialShare.vue";
 export default {
@@ -274,13 +275,22 @@ export default {
     },
     openShareLink(type) {
       let link = "";
+      const network = 4
       let { obj } = this;
       switch (type) {
         case "rarible":
-          link = `https://rarible.com/token/${obj.image_addr}:${obj.image_id}`;
+          if(ct.networkId = network){
+            link = `https://rinkeby.rarible.com/token/${obj.image_addr}:${obj.image_id}`;
+          }else{ 
+            link = `https://rarible.com/token/${obj.image_addr}:${obj.image_id}`;
+          } 
           break;
         case "opensea":
-          link = `https://opensea.io/assets/${obj.image_addr}/${obj.image_id}`;
+          if(ct.networkId = network){
+            link = `https://testnets.opensea.io/assets/${obj.image_addr}/${obj.image_id}`;
+          } else{ 
+            link = `https://opensea.io/assets/${obj.image_addr}/${obj.image_id}`;
+          }
           break;
         default:
       }
