@@ -12,6 +12,14 @@ module.exports = {
       xl: '1280px',
       '2xl': '1536px',
     },
+    extend:{
+       fontFamily: {
+        'serif': ['Superclarendon', 'Georgia', 'Cambria', 'Times New Roman']
+      },
+      colors:{
+        'trasp-white': 'hsl(0deg 0% 100% / 80%)', 
+      }
+    },
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
