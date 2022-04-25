@@ -74,7 +74,7 @@
           class="
             relative flex items-center
             justify-start col-span-4
-            md:border-8 border-4 border-orange-200
+            md:border-8 border-4 border-amber-200
             rounded-full
             xl:h-20
             md:h-16 md:mt-0
@@ -104,8 +104,8 @@
             </p>
             <div
               v-if="obj.user_count < Number(obj.goal)"
-              class=" w-16 h-16 p-2 -mr-3 bg-orange-300
-                border-8 border-orange-200
+              class=" w-16 h-16 p-2 -mr-3 bg-amber-300
+                border-8 border-amber-200
                 rounded-full
                 xl:h-28 xl:w-28
                 md:h-20 md:w-20

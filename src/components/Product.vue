@@ -36,7 +36,7 @@
             w-12
             h-12
             p-2
-            bg-orange-300
+            bg-amber-300
             ring-2 ring-white
             rounded-full
             border-100
