@@ -1,0 +1,182 @@
+body{
+  #rarible path{
+    fill: #ccc;
+    &:hover{ 
+        fill: #feda08;
+      //background:#feda08;
+    }
+    
+  }
+  #opensea path{
+    fill: #ccc;
+    &:hover{ 
+        fill: #2081e2;
+      //background:#feda08;
+    }
+  }
+  .hide-item{
+    display:none; 
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .bg-color-wrapper{
+   	background-color: rgb(31 41 55);
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .ants-number{
+    color: hsl(0deg 0% 0% / 13%);
+  }
+  .badge-price{
+    font-size: 16px;
+    top: -12px;
+  }
+  .badge-bundel{
+        top: -14px;
+  }
+  .bg-transpartent{
+    background: solmon;
+  }
+  .wallet-icon{
+    width: 40px;
+    fill:#d8d4d4; 
+    cursor: pointer
+  }
+  .opensea-icon{
+    position: absolute;
+    top: -8px;
+    left: -5px; 
+  }
+  .button-buy{
+    top: -22px;
+    right: -8px;
+  }
+  .leading-3{
+      line-height: 0.9 !important;
+  }
+  ul{
+    .text-4xl:{
+      line-height: 0.9 !important;
+    }
+  }
+  #loading{
+    overflow:hidden; 
+    div {
+      opacity:0.4;
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      background-color: #ccc;
+      top: -11px;
+      border-radius: 50%;
+    }
+
+    div:nth-child(1) {
+      background-color: #FF5460;
+      animation: move 2s infinite cubic-bezier(.2,.64,.81,.23);
+    }
+    div:nth-child(2) {
+      background-color: #FF9D84;
+      animation: move 2s 150ms infinite cubic-bezier(.2,.64,.81,.23);
+    }
+    div:nth-child(3) {
+      background-color: #F0E797;
+      animation: move 2s 300ms infinite cubic-bezier(.2,.64,.81,.23);
+    }
+    div:nth-child(4) {
+      background-color: #75B08A;
+      animation: move 2s 450ms infinite cubic-bezier(.2,.64,.81,.23);
+    }
+
+    @keyframes move {
+      0% {left: 0%;}
+      100% {left:100%;}
+    }
+  }
+    .op-5{
+      opacity: 0.5;
+    }
+
+}
+
+#spinner{
+
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+}
+#logo{
+   	background-color: rgb(31 41 55);
+    color:white;
+}
+#ant-bundle-logo {
+  filter: invert(1);
+}
+
+@media (min-width:976px) and (max-width:1439px) {
+  .price-size {
+    font-size: 10px;
+    margin-top: 2px;
+  }
+}
+
+@media (max-width:576px) {
+  .loading-message{
+    bottom: -24px 
+  } 
+}
