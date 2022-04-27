@@ -40,6 +40,7 @@
 import Icons from '@/components/Icons'
 import Notiz from '@/components/notiz'
 import get from '@/scripts/funct'
+import matemask from '@/scripts/metamask'
 import ct from '@/scripts/const'
 import w3 from '@/scripts/w3'
 export default {
@@ -57,81 +58,31 @@ export default {
   },
   computed:{
     notify(){
-      return this.$store.getters.notify
+      return this.$store.getters.notify;
     },
     isAuth(){
-      return this.$store.getters.auth
+      return this.$store.getters.auth;
     },
     currentAddress(){
-      return this.$store.getters.address
+      return this.$store.getters.address;
     },
   },
   watch: {
     isAuth(newValue) {
       if(newValue){
-        this.$router.replace('/')
+        this.$router.replace('/');
       }else{
-        this.$router.replace('/launch')
+        this.$router.replace('/launch');
       }
     }
   },
   methods:{
     colorAddr(){
-      return get.colorAddr(this.currentAddress)
+      return get.colorAddr(this.currentAddress);
     },
     async login(){ 
-      if(window.ethereum){
-
-          // get current network
-          const networkId = ct.networkId  
-          const currentNetworkId = Number(window.ethereum.networkVersion) 
-
-          // if current network is not equal mainnet switch to mainnet   
-          if(networkId !== currentNetworkId){
-            await window.ethereum.request({
-            method: 'wallet_switchEthereumChain',
-              params: [{ chainId: w3.prov.utils.toHex(networkId) }],
-            });   
-          }
-          
-          // get accounts
-          const accounts  = await window.ethereum.request({
-           method: "eth_accounts"
-          })
-
-          console.log(accounts)
-          // check if user is logged in
-          if(accounts.length === 0){
-           try{
-            const account = await window.ethereum.request({
-               method: "eth_requestAccounts"
-            })
-            
-            ccnsole.log(account)
-
-            this.account = account[0]
-            //this.$store.dispatch("send", account[0]) 
-            //this.$store.dispatch("login") 
-            //this.$forceUpdate();
-           }catch(error){
-             //console.log(error)
-             if(error.message === "Already processing eth_requestAccounts. Please wait."){
-              this.$store.commit("addNote", [{ type:'Info', text: "Please try to Login by clicking at the Metamask icon"  }])
-             }
-           }
-          }else{
-
-            const save_account  = await window.ethereum.request({
-             method: "eth_accounts"
-            })
-            ccnsole.log(save_account)
-            this.$store.dispatch("send", save_accounts[0]) 
-            this.$forceUpdate();
-
-          }
-      }
-
-    } // end login()
+      matemask.login();
+    }
   }
 }
 </script>

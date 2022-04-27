@@ -20,8 +20,7 @@
 </template>
 
 <script>
-
-
+import matemask from '@/scripts/metamask'
 export default {
   name: 'Login',
   components: {
@@ -40,12 +39,10 @@ export default {
   },
   methods:{
     lanch(){
-      console.log("lanch now!")
-      this.$store.commit("addNote", [{ type:'Error', text: `Please install Metamask`  }])
+      matemask.login();
     },
     imgUrl(img){
       return require(`@/assets/img/${img}.png`);
-      // The path could be '../assets/img.png', etc., which depends on where your vue file is
     },
   },
   mounted(){
