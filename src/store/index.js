@@ -362,7 +362,7 @@ export default createStore({
       let box = [];
       for (let i = 0; i < array.length; i++) {
         // console.log(array[i]);
-        box.push({ ...array[i], kind: "Product" });
+        box.push({ ...array[i], front_id: i ,  kind: "Product" });
         commit("addProducts", { update: box });
       }
       /*
