@@ -2,19 +2,20 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import User from '../views/User.vue'
 import Launch from '../views/Launch.vue'
+import Search from '../views/Search.vue'
 import NotFound from '../views/404.vue'
-import store from '../store/index.js';
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home,
+    props: true,
     beforeEnter(to, from, next){
-      if (store.getters.auth){
+      console.log("push it or not")
+      if (router.store.getters.auth){
          next()
        }else{
-         console.log("go to admin")
         next('/launch');
       }
     },
@@ -25,7 +26,7 @@ const routes = [
     name: 'User',
     component: User, 
     beforeEnter(to, from, next){
-      if (store.getters.auth){
+      if (router.store.getters.auth){
          next()
        }else{
          console.log("go to admin")
@@ -37,13 +38,21 @@ const routes = [
     path: '/Launch',
     name: 'Launch',
     beforeEnter(to, from, next){
-      if (store.getters.auth === false){
+      console.log("launch")
+      if (router.store.getters.auth === false){
          next()
        }else{
         next('/');
       }
     },
     component:Launch 
+  },
+  {
+    path: '/search/:id',
+    name: 'Search',
+    component: Search,
+    props: true,
+
   },
   { path: '/:catchAll(.*)', component: NotFound  }
 ]
