@@ -50,6 +50,12 @@ import store from '@/store'
 
 export default {
   name: 'Home Page',
+  props: {
+    name:{ 
+      type: String,
+      default: 'Mike'
+    } 
+  },
   components: {
    ProductDetail, 
     Product,
@@ -252,6 +258,10 @@ export default {
   async mounted(){ 
     window.addEventListener("resize", this.setPerRowValue);
     this.$store.commit("addNote", [])
+ 
+    
+    console.log(this.$route.query)
+  
   }
 }
 </script>

@@ -70,7 +70,7 @@
               "
             ></div>
             <div class="relative ">
-              <a
+              <span
                 v-for="(item, i) in items"
                 :key="i"
                 class="
@@ -89,11 +89,10 @@
                   duration-300
                   ease-in-out
                 "
-                :href="item.href"
-                @click="share($event)"
+                @click="share(item)"
               >
                 {{ item.title }}
-              </a>
+              </span>
             </div>
           </div>
         </div>
@@ -104,7 +103,7 @@
 
 <script>
 export default {
-  props: ["obj"],
+  props: ["info"],
   data() {
     return {
       isVisible: false,
@@ -112,40 +111,51 @@ export default {
         {
           social: "twitter",
           title: "Twitter",
-          text: "Hi there! https://codyhouse.co via @CodyWebHouse",
-          hashtags: "#nuggets, #dev",
+          text: "",
+          hashtags: "#antbundle",
+          image : "",
           href: "https://twitter.com/intent/tweet",
-          url: "",
+          url: "https://antbundle",
         },
         {
           social: "facebook",
           title: "Facebook",
           text: "",
-          hashtags: "",
+          image : "",
+          hashtags: "#antbundle",
           href: "http://www.facebook.com/sharer.php",
-          url: "https://codyhouse.co",
+          url: "https://antbundle.io",
         },
         {
           social: "pinterest",
           text: "",
+          image : "",
           title: "Pinterest",
           media: "https://codyhouse.co/app/assets/img/social-sharing-img-1.jpg",
           description: "Description for my Pinterest share",
-          hashtags: "",
+          hashtags: "#antbundle",
           href: "http://pinterest.com/pin/create/button",
-          url: "https://codyhouse.co",
+          url: "https://antbundle.io",
         },
       ],
     };
   },
   methods: {
-    share(event) { 
-      event.preventDefault();
-      var social = event.target.getAttribute("data-social");
-      var url = this.getSocialUrl(event.target, social);
-      social == "mail"
-        ? (window.location.href = url)
-        : window.open(url, social + "-share-dialog", "width=626,height=436");
+    share(item) { 
+
+      let text="", title = `Bundel team up with us ${item.hashtags}`
+      let remainUser = (Number(this.info.goal) - Number(this.info.user_count))
+      if(remainUser < 5){
+         text = `We only need ${remainUser} user to close the Bundle. Please hurry up.`
+      }else{ 
+         text = `We need ${remainUser} user to close the Bundle. Please hurry up.`
+      }
+
+      document.head.querySelector('meta[name="twitter:title"]').content = title 
+      document.head.querySelector('meta[name="twitter:description"]').content = text 
+      document.head.querySelector('meta[name="twitter:image"]').content = this.info.image_url
+      //console.log(document)
+      window.open( item.href, "_blank");
     },
     getSocialUrl(button, social) {
       var params = this.getSocialParams(social);
