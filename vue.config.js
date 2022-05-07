@@ -1,6 +1,8 @@
 module.exports = {
-  //publicPath: '/antbundle/'
+  publicPath: '/'
+  /*
   publicPath: process.env.NODE_ENV === 'production'
     ? '/antbundle/'
     : '/'
+  */
 }
