@@ -153,9 +153,10 @@ export default {
 
       document.head.querySelector('meta[name="twitter:title"]').content = title 
       document.head.querySelector('meta[name="twitter:description"]').content = text 
-      document.head.querySelector('meta[name="twitter:image"]').content = this.info.image_url
+      document.head.querySelector('meta[name="twitter:image:src"]').content = this.info.image_url
       //console.log(document)
-      window.open( item.href, "_blank");
+      const twitterLink = item.href + "?text=" + title
+      window.open( twitterLink , "_blank");
     },
     getSocialUrl(button, social) {
       var params = this.getSocialParams(social);
