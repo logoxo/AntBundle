@@ -70,7 +70,7 @@
               "
             ></div>
             <div class="relative ">
-              <span
+              <a
                 v-for="(item, i) in items"
                 :key="i"
                 class="
@@ -92,7 +92,7 @@
                 @click="share(item)"
               >
                 {{ item.title }}
-              </span>
+              </a>
             </div>
           </div>
         </div>
@@ -112,17 +112,17 @@ export default {
           social: "twitter",
           title: "Twitter",
           text: "",
-          hashtags: "#antbundle",
+          hashtags: ["%23antbundle", "%23AntGame"],
           image : "",
           href: "https://twitter.com/intent/tweet",
-          url: "https://antbundle",
+          url: "https://antbundle.io",
         },
         {
           social: "facebook",
           title: "Facebook",
           text: "",
           image : "",
-          hashtags: "#antbundle",
+          hashtags: ["%23antbundle", "%23AntGame"],
           href: "http://www.facebook.com/sharer.php",
           url: "https://antbundle.io",
         },
@@ -131,9 +131,9 @@ export default {
           text: "",
           image : "",
           title: "Pinterest",
+          hashtags: ["%23antbundle", "%23AntGame"],
           media: "https://codyhouse.co/app/assets/img/social-sharing-img-1.jpg",
           description: "Description for my Pinterest share",
-          hashtags: "#antbundle",
           href: "http://pinterest.com/pin/create/button",
           url: "https://antbundle.io",
         },
@@ -142,8 +142,7 @@ export default {
   },
   methods: {
     share(item) { 
-
-      let text="", title = `Bundel team up with us ${item.hashtags}`
+      let link, text, title = `Bundel team up with us ${item.hashtags}`
       let remainUser = (Number(this.info.goal) - Number(this.info.user_count))
       if(remainUser < 5){
          text = `We only need ${remainUser} user to close the Bundle. Please hurry up.`
@@ -151,52 +150,23 @@ export default {
          text = `We need ${remainUser} user to close the Bundle. Please hurry up.`
       }
 
-      document.head.querySelector('meta[name="twitter:title"]').content = title 
-      document.head.querySelector('meta[name="twitter:description"]').content = text 
-      document.head.querySelector('meta[name="twitter:image:src"]').content = this.info.image_url
-      //console.log(document)
-      const twitterLink = item.href + "?text=" + title
-      window.open( twitterLink , "_blank");
-    },
-    getSocialUrl(button, social) {
-      var params = this.getSocialParams(social);
-      var newUrl = "";
-      for (var i = 0; i < params.length; i++) {
-        var paramValue = button.getAttribute("data-" + params[i]);
-        if (params[i] == "hashtags")
-          paramValue = encodeURI(paramValue.replace(/\#| /g, ""));
-        if (paramValue) {
-          social == "facebook"
-            ? (newUrl = newUrl + "u=" + encodeURIComponent(paramValue) + "&")
-            : (newUrl =
-                newUrl +
-                params[i] +
-                "=" +
-                encodeURIComponent(paramValue) +
-                "&");
-        }
+      if(item.social === "twitter"){
+        // Twitter card share
+        document.head.querySelector('meta[name="twitter:title"]').content = title 
+        document.head.querySelector('meta[name="twitter:description"]').content = text 
+        document.head.querySelector('meta[name="twitter:image"]').content = this.info.image_url
+        let tagAndText = text + " " + item.hashtags.join(' ') 
+        link = `${item.href}?url=${item.url}&text=${tagAndText}`
+      }else{
+        // Facebook, discord, pinterest, ... card share
+        document.head.querySelector('meta[property="og:type"]').content = "article" 
+        document.head.querySelector('meta[property="og:title"]').content = title 
+        document.head.querySelector('meta[property="og:description"]').content = text 
+        document.head.querySelector('meta[property="og:image"]').content = this.info.image_url
+        link = item.href
+        console.log(document.head)
       }
-      if (social == "linkedin") newUrl = "mini=true&" + newUrl;
-      return button.getAttribute("href") + "?" + newUrl;
-    },
-    getSocialParams(social) {
-      var params = [];
-      switch (social) {
-        case "twitter":
-          params = ["text", "hashtags"];
-          break;
-        case "facebook":
-        case "linkedin":
-          params = ["url"];
-          break;
-        case "pinterest":
-          params = ["url", "media", "description"];
-          break;
-        case "mail":
-          params = ["subject", "body"];
-          break;
-      }
-      return params;
+      window.open( link ); 
     },
   },
 };
