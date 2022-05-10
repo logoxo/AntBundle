@@ -1,5 +1,32 @@
 <template>
-  <div class="antialiased font-sans flex">
+  <button
+    v-if="navigatorShare === true"
+    type="button"
+    class="
+      inline-flex
+      items-center
+      justify-between
+      px-2
+      py-1
+      font-medium
+      text-gray-700
+      transition-all
+      duration-500
+      rounded-md
+      focus:outline-none focus:text-brand-900
+      sm:focus:shadow-outline
+      mt-4
+      md:mt-0
+    "
+    @click="navShare(item)"
+  >
+    <img
+      src="../assets/svg/share.svg"
+      class="xl:w-20 xl:h-20 w-12 h-12"
+      alt=""
+    />
+  </button>
+  <div v-else class="antialiased font-sans flex">
     <!-- This empty div is only for demo purposes and it's used so you can close the menu on a touchscreen device. Normally you'd handle it differently by not using hover states on mobile, but by using real clicks. -->
     <div
       class="relative inline-block"
@@ -106,6 +133,7 @@ export default {
   props: ["info"],
   data() {
     return {
+      navigatorShare: false,
       isVisible: false,
       items: [
         {
@@ -118,57 +146,86 @@ export default {
           url: "https://antbundle.io",
         },
         {
-          social: "facebook",
-          title: "Facebook",
+          social: "reddit",
+          title: "Reddit",
           text: "",
           image : "",
           hashtags: ["%23antbundle", "%23AntGame"],
-          href: "http://www.facebook.com/sharer.php",
+          href: "https://www.reddit.com/submit",
           url: "https://antbundle.io",
         },
         {
-          social: "pinterest",
+          social: "telegram",
+          title: "Telegram",
           text: "",
           image : "",
-          title: "Pinterest",
           hashtags: ["%23antbundle", "%23AntGame"],
-          media: "https://codyhouse.co/app/assets/img/social-sharing-img-1.jpg",
-          description: "Description for my Pinterest share",
-          href: "http://pinterest.com/pin/create/button",
+          href: "http://t.me/share/url",
           url: "https://antbundle.io",
         },
       ],
     };
   },
   methods: {
-    share(item) { 
-      let link, text, title = `Bundel team up with us ${item.hashtags}`
-      let remainUser = (Number(this.info.goal) - Number(this.info.user_count))
+    navShare(item){
+      let text, title = `Bundel team up with us ${item.hashtags}`;
+
       if(remainUser < 5){
          text = `We only need ${remainUser} user to close the Bundle. Please hurry up.`
       }else{ 
          text = `We need ${remainUser} user to close the Bundle. Please hurry up.`
       }
 
-      if(item.social === "twitter"){
-        // Twitter card share
-        document.head.querySelector('meta[name="twitter:title"]').content = title 
-        document.head.querySelector('meta[name="twitter:description"]').content = text 
-        document.head.querySelector('meta[name="twitter:image"]').content = this.info.image_url
-        let tagAndText = text + " " + item.hashtags.join(' ') 
-        link = `${item.href}?url=${item.url}&text=${tagAndText}`
-      }else{
-        // Facebook, discord, pinterest, ... card share
-        document.head.querySelector('meta[property="og:type"]').content = "article" 
-        document.head.querySelector('meta[property="og:title"]').content = title 
-        document.head.querySelector('meta[property="og:description"]').content = text 
-        document.head.querySelector('meta[property="og:image"]').content = this.info.image_url
-        link = item.href
-        console.log(document.head)
+       const shareData = { title: title, text: text, url: item.url } 
+       navigator.share(shareData)
+    },
+    share(item) { 
+      let link, text, title = `Bundel team up with us ${item.hashtags}`
+      let remainUser = (Number(this.info.goal) - Number(this.info.user_count));
+      let url = item.url + "?key=" + this.info.image_addr;
+      
+      if(remainUser < 5){
+         text = `We only need ${remainUser} user to close the Bundle. Please hurry up.`;
+      }else{ 
+         text = `We need ${remainUser} user to close the Bundle. Please hurry up.`;
+      }
+
+      //open graph metatag should not get update if twitter is selected
+      if(item.social !== "twitter"){ 
+        document.head.querySelector('meta[property="og:type"]').content = "article";
+        document.head.querySelector('meta[property="og:title"]').content = title;
+        document.head.querySelector('meta[property="og:description"]').content = text;
+        document.head.querySelector('meta[property="og:image"]').content = this.info.image_url;
+      }
+
+      switch(item.social) {
+        case "twitter":
+          document.head.querySelector('meta[name="twitter:title"]').content = title;
+          document.head.querySelector('meta[name="twitter:description"]').content = text; 
+          document.head.querySelector('meta[name="twitter:image"]').content = this.info.image_url;
+          let twitterText = text + " " + item.hashtags.join(' ') ;
+          link = `${item.href}?url=${url}&text=${twitterText}`;
+          break;
+        case "telegram":
+          // Facebook, discord, pinterest, ... card share
+          link = `${item.href}?url=${url}&${text}`;
+          console.log(document.head);
+          break;
+        case "reddit": 
+            link = `${item.href}?url=${url}&title=${title}`;
+          break;
       }
       window.open( link ); 
     },
   },
+  mounted(){
+    if(navigator.share !== undefined){
+      this.navigatorShare=true      
+    }else{
+      this.navigatorShare=false     
+    }
+    console.log(navigator.share) 
+  }
 };
 </script>
 
