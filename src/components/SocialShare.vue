@@ -1,33 +1,15 @@
 <template>
-  <button
-    v-if="navigatorShare === true"
-    type="button"
-    class="
-      inline-flex
-      items-center
-      justify-between
-      px-2
-      py-1
-      font-medium
-      text-gray-700
-      transition-all
-      duration-500
-      rounded-md
-      focus:outline-none focus:text-brand-900
-      sm:focus:shadow-outline
-      mt-4
-      md:mt-0
-    "
-    @click="navShare(item)"
-  >
-    <img
-      src="../assets/svg/share.svg"
-      class="xl:w-20 xl:h-20 w-12 h-12"
-      alt=""
-    />
-  </button>
+ <div v-if="navigatorShare">
+    <button >
+      <img
+        src="../assets/svg/share.svg"
+        class="xl:w-20 xl:h-20 w-12 h-12"
+        alt=""
+        @click="navShare(item)"
+      />
+    </button>
+  </div>
   <div v-else class="antialiased font-sans flex">
-    <!-- This empty div is only for demo purposes and it's used so you can close the menu on a touchscreen device. Normally you'd handle it differently by not using hover states on mobile, but by using real clicks. -->
     <div
       class="relative inline-block"
       @click="isVisible = !isVisible"
@@ -167,20 +149,21 @@ export default {
     };
   },
   methods: {
-    navShare(item){
-      let text, title = `Bundel team up with us ${item.hashtags}`;
-
+    navShare(){
+      let text, title = `Bundle up with us ${this.items[0].hashtags.join(" ")}`;
+      let remainUser = (Number(this.info.goal) - Number(this.info.user_count));
       if(remainUser < 5){
          text = `We only need ${remainUser} user to close the Bundle. Please hurry up.`
       }else{ 
          text = `We need ${remainUser} user to close the Bundle. Please hurry up.`
       }
 
-       const shareData = { title: title, text: text, url: item.url } 
-       navigator.share(shareData)
+      const shareData = { title: title, text: text, url: this.items[0].url } 
+      console.log(shareData)
+       //navigator.share(shareData)
     },
     share(item) { 
-      let link, text, title = `Bundel team up with us ${item.hashtags}`
+      let link, text, title = `Bundle up with us ${item.hashtags.join(" ")}`
       let remainUser = (Number(this.info.goal) - Number(this.info.user_count));
       let url = item.url + "?key=" + this.info.image_addr;
       
@@ -224,7 +207,7 @@ export default {
     }else{
       this.navigatorShare=false     
     }
-    console.log(navigator.share) 
+    //console.log(navigator.share) 
   }
 };
 </script>
