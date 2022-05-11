@@ -145,32 +145,36 @@ export default {
           href: "http://t.me/share/url",
           url: "https://antbundle.io",
         },
-      ],
+      ], 
+      title : "Bundle up with us ", 
+      remainUser: (Number(this.info.goal) - Number(this.info.user_count)),
+      text1 : "We only need " + this.remainUser + " user to close the Bundle. Please hurry up.",
+      text2 : "We need" + this.remainUser + "user to close the Bundle. Please hurry up."
+
     };
   },
   methods: {
     navShare(){
-      let text, title = `Bundle up with us ${this.items[0].hashtags.join(" ")}`;
-      let remainUser = (Number(this.info.goal) - Number(this.info.user_count));
-      if(remainUser < 5){
-         text = `We only need ${remainUser} user to close the Bundle. Please hurry up.`
+      let text , url = this.items[0].url + "?key=" + this.info.image_addr;
+      let title = this.title + this.items[0].hashtags.join(" ");
+
+      if(this.remainUser < 5){
+         text = this.text1;
       }else{ 
-         text = `We need ${remainUser} user to close the Bundle. Please hurry up.`
+         text = this.text2;
       }
 
-      const shareData = { title: title, text: text, url: this.items[0].url } 
-      console.log(shareData)
-       //navigator.share(shareData)
+      const shareData = { title: title, text: text, url: this.items[0].url }  
+      navigator.share(shareData)
     },
     share(item) { 
-      let link, text, title = `Bundle up with us ${item.hashtags.join(" ")}`
-      let remainUser = (Number(this.info.goal) - Number(this.info.user_count));
-      let url = item.url + "?key=" + this.info.image_addr;
-      
-      if(remainUser < 5){
-         text = `We only need ${remainUser} user to close the Bundle. Please hurry up.`;
+      let link, text, url = item.url + "?key=" + this.info.image_addr;
+      let title = this.title + this.items[0].hashtags.join(" ");
+
+      if(this.remainUser < 5){
+         text = this.text1;
       }else{ 
-         text = `We need ${remainUser} user to close the Bundle. Please hurry up.`;
+         text = this.text2;
       }
 
       //open graph metatag should not get update if twitter is selected
@@ -207,7 +211,7 @@ export default {
     }else{
       this.navigatorShare=false     
     }
-    //console.log(navigator.share) 
+    console.log(navigator.share) 
   }
 };
 </script>
