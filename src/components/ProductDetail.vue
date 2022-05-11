@@ -179,7 +179,8 @@
             lg:block
             md:w-72
             lg:w-52
-            xl:w-80
+            xl:w-72
+            xxl:w-80
             h-64
             md:h-72
             lg:h-52
@@ -200,7 +201,7 @@
             "
           >
             <legend class="text-lg text-gray-400 px-2 font-serif">Ant Bundel</legend>
-            <div class=" flex flex-wrap gap-2">
+            <div class="grid grid-cols-3 xl:grid-cols-4 gap-2">
               <div
                 v-for="(address, index) in obj.addr_list"
                 class="rounded-full h-12 w-12 xl:h-12 xl:w-12"
