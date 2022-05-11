@@ -105,6 +105,7 @@ export default {
       } else if (window.innerWidth > 975) {
         this.perRow = 4;
       }
+      console.log("resposive")
       console.log(this.perRow)
     },
     validate_txhash(addr)
@@ -256,6 +257,7 @@ export default {
     },
   },
   async mounted(){ 
+    this.setPerRowValue()
     window.addEventListener("resize", this.setPerRowValue);
     this.$store.commit("addNote", [])
  
