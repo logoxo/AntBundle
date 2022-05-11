@@ -52,7 +52,7 @@ export default {
   name: 'Search Page',
   props: {
     id:{ 
-      type: Number,
+      type: String,
       default: 'Mike'
     } 
   },
