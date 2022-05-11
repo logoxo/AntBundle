@@ -150,7 +150,6 @@ export default {
       remainUser: (Number(this.info.goal) - Number(this.info.user_count)),
       text1 : "We only need " + this.remainUser + " user to close the Bundle. Please hurry up.",
       text2 : "We need" + this.remainUser + "user to close the Bundle. Please hurry up."
-
     };
   },
   methods: {
