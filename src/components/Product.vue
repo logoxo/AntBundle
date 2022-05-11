@@ -19,14 +19,14 @@
       <div class="col-span-3">
         <div class="  flex -space-x-6 md:ml-6">
           <template v-if="Number(obj.user_count)">
-            <div v-for="(address, index) in twelveAvatar"
+            <div v-for="(address, index) in Avatars"
               :key="'count-' + index + 1"
               class="md:hidden  inline-block w-12 h-12 rounded-full ring-2 ring-white"
               :style="{ backgroundColor: colorAddr(address) }"
             ></div>
             <div v-for="(address, index) in fourAvatar"
               :key="'count-' + index + 1"
-              class="sm:hidden md:block w-12 h-12 rounded-full ring-2 ring-white"
+              class="hidden md:block w-12 h-12 rounded-full ring-2 ring-white"
               :style="{ backgroundColor: colorAddr(address) }"
             ></div>
           </template>
@@ -83,8 +83,8 @@ export default {
     fourAvatar(){
       return funct.fourAvatar(this.obj.addr_list)
     },
-    twelveAvatar(){
-      return funct.fourAvatar(this.obj.addr_list, 12)
+    Avatars(){
+      return funct.fourAvatar(this.obj.addr_list, 8)
     },
     kether(){
       return funct.kether(this.obj.value)
