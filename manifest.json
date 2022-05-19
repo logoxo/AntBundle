@@ -1,0 +1,6 @@
+{
+  "name": "RukiStep",
+  "description": "Set up vesting schedules",
+  "iconPath": "favicon.ico",
+  "providedBy": { "name": "Blockrocket.tech", "url": "https://blockrocket.tech" }
+}
