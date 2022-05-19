@@ -1,11 +1,11 @@
 <template>
-  <div v-if="!loading" class="home pt-8">
-     <div class="mx-auto px-4 pb-4">
+  <div v-if="!loading" class="home px-4 pt-8">
+     <div class="mx-auto pb-4">
         <div class="container mx-auto">
           <!--  div class="grid grid-cols-2 gap-4  md:grid-cols-4 md:gap-4 lg:gap-7 xl:gap-8  2xl:gap-8 " -->
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div v-for="(product, index) in products" :key="index" :class="`${product.kind === 'Product' ? 'item-'+product.id : 'col-span-full' }`">
+          <div v-for="(product, index) in products" :key="index" :class="`${product.kind === 'Product' ? 'item-'+product.id : 'col-span-full product-detail' }`">
 
             <!-- div v-for="(product, index) in products" :key="index" :class="{ 'cols-span-full': product.kind === 'ProductDetail'    }" -->
             <component :is="product.kind" :obj="{ ...product, index:product.id, total: products.length }" />

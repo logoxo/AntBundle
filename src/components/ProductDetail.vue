@@ -1,14 +1,18 @@
 <template>
   <div
     class="
-      h-full
+      md:h-full
       xl:p-8
       bg-white bg-cover
       rounded-3xl
+      border-2
+      border-gray-300
       w-full
-      flex flex-col
+      md:flex md:flex-col
       p-0
       md:p-4
+      pb-4
+      md:pb-0
     "
   >
     <div class="flex flex-col h-full gap-4 md:flex-row justify-between">
@@ -30,7 +34,7 @@
         </div>
       </div>
       <div class="w-full flex flex-col justify-between px-4">
-        <div class="flex md:pl-1 flex-col md:flex-row">
+        <div class="flex space-x-2  flex-row md:pl-1 ">
           <div
             class="
               flex flex-col xl:mr-8 md:p-2
@@ -39,7 +43,7 @@
               md:w-28 md:h-20
               h-18 bg-gray-100 md:bg-white
               rounded-lg md:mb-0 md:mr-4 mb-4
-              w-full
+              md:w-full
             "
             v-for="(price, i) in priceItems"
             :key="i"
@@ -47,15 +51,15 @@
             <div
               class="
                 text-xs text-gray-600
-                bg-gray-100 absolute rounded-lg
-                p-1 px-2 top-1
+                md:bg-gray-100 absolute rounded-lg
+                p-1 px-1 md:px-2 top-1
               "
             >
               {{ price.label }}
             </div>
             <div
               class="
-                text-3xl md:text-xl xl:text-3xl
+                text-md  md:text-xl  xl:text-3xl
                 font-bold leading-3 flex
                 text-gray-600
                 items-center
@@ -145,7 +149,7 @@
             :style="{ width: progress + '%' }"
           ></div>
         </div>
-        <div class="flex items-center gap-4 icons-wrapper">
+        <div class="flex items-center gap-4 icons-wrapper mt-4 md:mt-0">
           <div
             v-for="(name, index) in obj.platform"
             :key="name + index"
@@ -156,9 +160,8 @@
               items-center
               justify-center
               xl:w-20 xl:h-20
-              w-12
-              h-12
-              mt-4
+              w-12 md:w-10 lg:w-12
+              mr-2
               md:mt-0
               col-span-4
               rounded-full
@@ -166,9 +169,15 @@
             "
             :class="getbg(name)"
           >
-            <Icons :name="name" />
+            <img :src="imgUrl(name)" />
           </div>
-          <socialShare :info=obj  />
+            <div class="w-14 lg:w-20">
+            <socialShare :info=obj  />
+          </div>
+          <div class="grow w-32"></div>
+          <div class="w-8 h-8  md:hidden" @click="close" >
+            <Icons :name="'close'" />
+          </div>
         </div>
       </div>
       <div>
@@ -261,6 +270,9 @@ export default {
     },
   },
   methods: {
+    close(){
+      this.$parent.closeProductDetail()
+    }, 
     invest(){
       this.$parent.pay(this.obj)
     }, 

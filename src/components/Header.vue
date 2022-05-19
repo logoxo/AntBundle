@@ -7,16 +7,16 @@
             <img
               id="ant-bundle-logo"
               src="../assets/svg/logo.svg"
-              class="w-14 ml-2"
+              class="w-10 h-10  md:w-14 md:ml-2"
               alt=""
             />
           </router-link>
           <router-link to="/">
-            <h1 class="pl-2 hidden lg:block"><strong>AntBundle</strong></h1>
+            <h1 class="pl-2 pt-2 hidden lg:block"><strong>AntBundle</strong></h1>
           </router-link>
         </div>
       </div>
-        <div class="container col-span-3 md:col-span-4 ">
+        <div class="container col-span-4 md:col-span-3 md:col-span-4 ">
           <div class="relative notification min-h-16 sm:pl-2">
             <Notiz />
           </div>
@@ -27,7 +27,7 @@
     <div v-else class="flex justify-center">
       <router-link to="/user">
         <div
-          class="w-14 h-14 rounded-full ring-4 ring-gray-200"
+          class=" w-14 h-14 rounded-full ring-4 ring-gray-200"
           :style="{ backgroundColor: colorAddr() }"
         ></div>
       </router-link>

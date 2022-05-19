@@ -31,7 +31,6 @@
           rounded-md
           focus:outline-none focus:text-brand-900
           sm:focus:shadow-outline
-          mt-4
           md:mt-0
         "
       >

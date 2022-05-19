@@ -3,7 +3,7 @@ import call from '@/scripts/request'
 import w3 from '@/scripts/w3' 
 export default createStore({
   state: {
-    addr:null,
+    addr:3939302292032932092,
     closedList:[],
     notify:[],
     addrList:[],
